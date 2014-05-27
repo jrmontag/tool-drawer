@@ -10,6 +10,9 @@ echo
 # file type
 FILE=".git"
 
+start_dir=$(pwd)
+cd $HOME                                    # assumes your repos are in ~
+
 for d in $(find -maxdepth 1 -type d); do    # find dirs in home 
     if [ $(find $d -name $FILE) ]; then     # look for sign of git repo 
         cd $d                               
@@ -24,5 +27,7 @@ for d in $(find -maxdepth 1 -type d); do    # find dirs in home
         cd ~    # jump back to ~
     fi
 done
+
+cd $start_dir                               # politely retur to starting location
 
 echo $(date)
