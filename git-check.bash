@@ -2,32 +2,36 @@
 # Josh Montague
 # MIT License
 
+# this script is intended to be run from anywhere and let you know if your git
+#    repos are in any state other than "clean". this was originally intended 
+#    to let me know - quickly - if i would regret deleting a bunch of
+#    directories. note that this script assumes a few things (for now):
+#    - the repos you want to check out are located in your home dir (~)
+#    - the repo dirs do not contain other repos (ie we only go one layer down)
+
 echo $(date)
 echo
 
-#TODO: generalize "what to look for" & "what to do now"
+STARTDIR=$(pwd)     # keep track of where we started
+REPODIR=$HOME       # location in which the repos are stored  
+FILE=".git"         # file for which we're looking 
 
-# file type
-FILE=".git"
-
-start_dir=$(pwd)
-cd $HOME                                    # assumes your repos are in ~
-
-for d in $(find -maxdepth 1 -type d); do    # find dirs in home 
-    if [ $(find $d -name $FILE) ]; then     # look for sign of git repo 
+cd $REPODIR
+for d in $(find . -maxdepth 1 -type d); do                # find dirs 
+    if [ $(find $d -maxdepth 1 -name $FILE) ]; then     # look for sign of git repo 
         cd $d                               
-        RESP=$(git status)                  # find current status 
+        RESP=$(git status)                              # find current status 
         if [[ $RESP != *"working directory clean"* ]]; then
             echo
             echo "******************************************************"
-            echo "repo: $d has changes!"
-            echo "response: ${RESP}"
+            echo "repo: $d has changes! git status: "
+            echo
+            echo "${RESP}"
             echo
         fi
-        cd ~    # jump back to ~
+        cd ~                                            # jump back to ~
     fi
 done
 
-cd $start_dir                               # politely retur to starting location
-
+cd $STARTDIR                               # politely return to starting location
 echo $(date)
