@@ -28,10 +28,15 @@ for d in $(find . -maxdepth 1 -type d); do                # find dirs
             echo
             echo "${RESP}"
             echo
+            echo "******************************************************"
+            echo
         fi
         cd ~                                            # jump back to ~
     fi
 done
 
 cd $STARTDIR                               # politely return to starting location
+
+echo "done."
+
 echo $(date)
