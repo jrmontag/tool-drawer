@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Josh Montague
+# MIT License
 
 # differeator.sh: a simple shell script to "diff" the contents of two csv-like files, row by row
 
