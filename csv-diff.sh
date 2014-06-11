@@ -2,7 +2,7 @@
 # Josh Montague
 # MIT License
 
-# differeator.sh: a simple shell script to "diff" the contents of two csv-like files, row by row
+# csv-diff.sh: a simple shell script to "diff" the contents of two csv-like files, row by row
 
 
 ### user params ###
