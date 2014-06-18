@@ -31,7 +31,7 @@ for d in $(find . -maxdepth 1 -type d); do                # find dirs
             echo "******************************************************"
             echo
         fi
-        cd ~                                            # jump back to ~
+        cd -                                            # jump back 
     fi
 done
 
